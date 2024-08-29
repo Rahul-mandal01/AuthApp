@@ -58,21 +58,21 @@ exports.isStudent = (req, res, next) => {
     }
 }
 
-// exports.isAdmin = (req, res, next) => {
-//     try{
-//         if(req.user.role !== "Admin"){
-//             return res.status(401).json({
-//                 success:false,
-//                 message:"This is protected route for students"
-//             })
-//         }
-//         next();
+exports.isAdmin = (req, res, next) => {
+    try{
+        if(req.user.role !== "Admin"){
+            return res.status(401).json({
+                success:false,
+                message:"This is protected route for students"
+            })
+        }
+        next();
 
-//     }catch(error){
-//         return res.status(500).json({
-//             success:false,
-//             message:"Something went wrong, while verifying User role"
-//         })
+    }catch(error){
+        return res.status(500).json({
+            success:false,
+            message:"Something went wrong, while verifying User role"
+        })
 
-//     }
-// }
+    }
+}

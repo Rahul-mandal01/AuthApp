@@ -7,7 +7,13 @@ exports.auth = (req, res, next) => {
     try{
         // extract jwt tokens
         // pending: other ways to fetch tokens
-        const token = req.body.token;
+        
+        console.log("cookie: " , req.cookies.token);
+        console.log("body: " , req.body.token);
+        console.log("header: " , req.header("Authorization"));
+
+
+        const token = req.body.token || req.cookies.token || req.header("Authorization").replace("Bearer ","");
 
         if(!token){
             return res.status(401).json({

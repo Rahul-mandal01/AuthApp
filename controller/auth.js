@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
 const UserModel = require('../model/UserModel');
-const jwt = require('jsonwebtoken');
+const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
 // signup route handler
@@ -108,6 +108,11 @@ exports.login = async (req, res) => {
                 message: "Logged in successfully",
                 user, token
             })
+            // res.status(200).json({
+            //     success: true,
+            //     message: "Logged in successfully",
+            //     user, token
+            // })
         }
         else{
             // password do not match

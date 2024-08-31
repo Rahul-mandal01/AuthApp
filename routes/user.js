@@ -12,7 +12,7 @@ router.post("/signup", signup);
 router.get("/test", auth, (req,res) =>{
     res.json({
         success: true,
-        message:"Welcome th the protected route for TESTS",
+        message:"Welcome to the protected route for TESTS",
     })
 })
 
@@ -31,7 +31,27 @@ router.get("/admin", auth, isAdmin, (req,res) => {
     })
 });
 
+router.get("/getEmail" , auth, async (req, res) => {
+    try{
+        const id = req.user.id;
+        console.log("ID:", id);
+        const user = await user.findById(id);
 
+        res.status(200).json({
+            success:true,
+            user:user,
+            message:"Welcome to the email route"
+        })
+    }
+
+    catch(error){
+        res.status(500).json({
+            success:false,
+            error:error.message,
+            message:"Fatt gya code"
+        })
+    }
+});
 
 
 module.exports = router;

@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt');
 const UserModel = require('../model/UserModel');
 const jwt = require("jsonwebtoken");
+const {options} = require("../routes/user");
 require("dotenv").config();
 
 // signup route handler
@@ -27,8 +28,8 @@ exports.signup = async (req, res) => {
         catch(error){
             return res.status(500).json({
                 success: false,
-                message:"Error hashing password"
-            })
+                message:"Error in hashing password"
+            });
         }
 
         // create entry for user
@@ -50,7 +51,7 @@ exports.signup = async (req, res) => {
         return res.status(500).json({
             success: false,
             message:"User cannot be registered, please try again later"
-        })
+        });
     }
 }
 
@@ -80,7 +81,7 @@ exports.login = async (req, res) => {
         }
 
         const payload = {
-            email:user.email,
+            email: user.email,
             id: user._id,
             role: user.role
         };
@@ -108,11 +109,11 @@ exports.login = async (req, res) => {
                 message: "Logged in successfully",
                 user, token
             })
-            // res.status(200).json({
-            //     success: true,
-            //     message: "Logged in successfully",
-            //     user, token
-            // })
+        //    res.status(200).json({
+        //         success: true,
+        //         message: "Logged in successfully",
+        //         user, token
+        //     }) 
         }
         else{
             // password do not match

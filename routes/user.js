@@ -1,5 +1,6 @@
 const express  = require('express');
 const router = express.Router();
+const User = require("../model/UserModel");
 
 const {login, signup} = require("../controller/auth");
 const {auth, isStudent, isAdmin} = require("../middlewares/auth");
@@ -14,7 +15,7 @@ router.get("/test", auth, (req,res) =>{
         success: true,
         message:"Welcome to the protected route for TESTS",
     })
-})
+});
 
 // protected routes
 router.get("/student", auth, isStudent, (req,res) => {
@@ -35,7 +36,7 @@ router.get("/getEmail" , auth, async (req, res) => {
     try{
         const id = req.user.id;
         console.log("ID:", id);
-        const user = await user.findById(id);
+        const user = await User.findById(id);
 
         res.status(200).json({
             success:true,
